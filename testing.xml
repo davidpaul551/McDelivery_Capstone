@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="McDelivery Test Suite" parallel="false" thread-count="1">
+    <!-- Test 1: Functional Tests -->
+    <test name="FunctionalTests">
+        <classes>
+            <!-- Base Class -->
+            <class name="McDelivery.Base.baseClass" />
+
+            <!-- Page Classes -->
+            <class name="McDelivery.pages.itemSearchPage" />
+            <class name="McDelivery.pages.customizationPage" />
+            <class name="McDelivery.pages.playStoreIconPage" />
+
+
+            <!-- Test Classes -->
+            <class name="McDelivery.Test.itemSearchTest" />
+            <class name="McDelivery.Test.customizationTest" />
+            <class name="McDelivery.Test.playStoreIconTest" />
+
+        </classes>
+    </test>
+
+</suite>

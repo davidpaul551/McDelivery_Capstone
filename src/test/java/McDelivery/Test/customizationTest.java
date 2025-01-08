@@ -1,20 +1,23 @@
 package McDelivery.Test;
 
 import McDelivery.Base.baseClass;
+import McDelivery.excelData;
 import McDelivery.pages.customizationPage;
 import McDelivery.pages.itemSearchPage;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class customizationTest extends baseClass {
-    @Test(priority = 1)
-    public void verifyAddItemWithoutCustomisations() throws InterruptedException {
+    @Test(dataProvider = "testDataDetails",dataProviderClass = excelData.class,priority = 1)
+    public void verifyAddItemWithoutCustomisations(String URL , String searchFoodItemName, String searchFoodByUPPER, String searchFoodByLOWER, String searchFoodByCategory, String searchFoodByPartial, String searchFoodByInvalidName, Integer Quantity, String searchFoodBySpecialChar) throws InterruptedException {
         test = extent.createTest("Verify if item is added to cart without customisations");
         customizationPage customObj = new customizationPage(driver);
         itemSearchPage searchPageObj = new itemSearchPage(driver);
         Thread.sleep(2000);
         waitForElementToBeClickable(searchPageObj.clickItemSearchBar(),10).click();
         searchPageObj.searchItem(searchFoodItemName);
+
+
         customObj.firstItem();
         waitForElementToBeClickable(customObj.addToCartItem(),10).click();
         double initialItemPrice = customObj.getItemPrice();
@@ -49,8 +52,8 @@ public class customizationTest extends baseClass {
         }
 
     }
-    @Test(priority = 2)
-    public void verifyIncreaseQuantity() throws InterruptedException {
+    @Test(dataProvider = "testDataDetails",dataProviderClass = excelData.class,priority = 2)
+    public void verifyIncreaseQuantity(String URL , String searchFoodItemName, String searchFoodByUPPER, String searchFoodByLOWER, String searchFoodByCategory, String searchFoodByPartial, String searchFoodByInvalidName, Integer Quantity, String searchFoodBySpecialChar) throws InterruptedException {
         test = extent.createTest("Verify if increasing item quantity reflects price");
         customizationPage customObj = new customizationPage(driver);
         itemSearchPage searchPageObj = new itemSearchPage(driver);
@@ -76,8 +79,8 @@ public class customizationTest extends baseClass {
 
 
     }
-    @Test(priority = 3)
-    public void verifyDecreaseQuantity() throws InterruptedException {
+    @Test(dataProvider = "testDataDetails",dataProviderClass = excelData.class,priority = 3)
+    public void verifyDecreaseQuantity(String URL , String searchFoodItemName, String searchFoodByUPPER, String searchFoodByLOWER, String searchFoodByCategory, String searchFoodByPartial, String searchFoodByInvalidName, Integer Quantity, String searchFoodBySpecialChar) throws InterruptedException {
         test = extent.createTest("Verify if increasing and decreasing quantity reflects price");
         customizationPage customObj = new customizationPage(driver);
         itemSearchPage searchPageObj = new itemSearchPage(driver);
@@ -111,8 +114,8 @@ public class customizationTest extends baseClass {
 
     }
 
-    @Test(priority = 4)
-    public void verifyIfCustomisableDisplayed() throws InterruptedException {
+    @Test(dataProvider = "testDataDetails",dataProviderClass = excelData.class,priority = 4)
+    public void verifyIfCustomisableDisplayed(String URL , String searchFoodItemName, String searchFoodByUPPER, String searchFoodByLOWER, String searchFoodByCategory, String searchFoodByPartial, String searchFoodByInvalidName, Integer Quantity, String searchFoodBySpecialChar) throws InterruptedException {
         test = extent.createTest("Verify if customisable text and add to cart displayed   under item");
         customizationPage customObj = new customizationPage(driver);
         itemSearchPage searchPageObj = new itemSearchPage(driver);
@@ -125,9 +128,9 @@ public class customizationTest extends baseClass {
         test.pass("Add to cart is displayed under search item");
     }
 
-    @Test(priority = 5)
-    public void verifyCustomisableItems() throws InterruptedException {
-        test = extent.createTest("Verify if customised details are shown in cart and price is   reflected");
+    @Test(dataProvider = "testDataDetails",dataProviderClass = excelData.class,priority = 5)
+    public void verifyCustomisableItems(String URL , String searchFoodItemName, String searchFoodByUPPER, String searchFoodByLOWER, String searchFoodByCategory, String searchFoodByPartial, String searchFoodByInvalidName, Integer Quantity, String searchFoodBySpecialChar) throws InterruptedException {
+        test = extent.createTest("Verify if customised details are shown in cart and price is reflected");
         customizationPage customObj = new customizationPage(driver);
         itemSearchPage searchPageObj = new itemSearchPage(driver);
         waitForElementToBeClickable(searchPageObj.clickItemSearchBar(),10).click();
@@ -159,8 +162,8 @@ public class customizationTest extends baseClass {
         }
     }
 
-    @Test(priority = 6)
-    public void verifyRemoveCustomisedItems() throws InterruptedException {
+    @Test(dataProvider = "testDataDetails",dataProviderClass = excelData.class,priority = 6)
+    public void verifyRemoveCustomisedItems(String URL , String searchFoodItemName, String searchFoodByUPPER, String searchFoodByLOWER, String searchFoodByCategory, String searchFoodByPartial, String searchFoodByInvalidName, Integer Quantity, String searchFoodBySpecialChar) throws InterruptedException {
         test = extent.createTest("Verify if removing an item reflects the price in the cart");
         customizationPage customObj = new customizationPage(driver);
         itemSearchPage searchPageObj = new itemSearchPage(driver);
@@ -215,8 +218,8 @@ public class customizationTest extends baseClass {
         }
     }
 
-    @Test(priority = 7)
-    public void verifyRemoveAllCustomisedItems() throws InterruptedException {
+    @Test(dataProvider = "testDataDetails",dataProviderClass = excelData.class,priority = 7)
+    public void verifyRemoveAllCustomisedItems(String URL , String searchFoodItemName, String searchFoodByUPPER, String searchFoodByLOWER, String searchFoodByCategory, String searchFoodByPartial, String searchFoodByInvalidName, Integer Quantity, String searchFoodBySpecialChar) throws InterruptedException {
         test = extent.createTest("Verify if price reflects by removing all added              customisations");
         customizationPage customObj = new customizationPage(driver);
         itemSearchPage searchPageObj = new itemSearchPage(driver);

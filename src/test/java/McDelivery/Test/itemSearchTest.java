@@ -1,6 +1,7 @@
 package McDelivery.Test;
 
 import McDelivery.Base.baseClass;
+import McDelivery.excelData;
 import McDelivery.pages.itemSearchPage;
 import com.aventstack.extentreports.MediaEntityBuilder;
 import org.openqa.selenium.By;
@@ -8,27 +9,28 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import java.util.List;
 
 
 public class itemSearchTest extends baseClass {
-    itemSearchPage searchPageObj;
     private By enterMinimum;
+    itemSearchPage searchPageObj;
 
-    @Test(priority = 1)
+    @Test( priority = 1)
     public void VerifySearchItemVisible() {
         test = extent.createTest("verify Search Bar Visibility");
-        itemSearchPage searchPageObj = new itemSearchPage(driver);
+        searchPageObj = new itemSearchPage(driver);
         Assert.assertTrue(searchPageObj.isSearchBarVisible(), "Search Bar is not visible");
         test.pass("Search Bar is Visible");
 
     }
 
-    @Test(priority = 2)
-    public void enterValidItemsVerifyResults() throws InterruptedException {
+    @Test(dataProvider = "testDataDetails",dataProviderClass = excelData.class,priority = 2)
+    public void enterValidItemsVerifyResults( String URL ,String searchFoodItemName, String searchFoodByUPPER, String searchFoodByLOWER, String searchFoodByCategory, String searchFoodByPartial, String searchFoodByInvalidName, Integer Quantity, String searchFoodBySpecialChar) throws InterruptedException {
         test = extent.createTest("To validate search results with valid name");
-        itemSearchPage searchPageObj = new itemSearchPage(driver);
+        searchPageObj = new itemSearchPage(driver);
         Thread.sleep(3000);
         searchPageObj.clickItemSearchBar();
         searchPageObj.searchItem(searchFoodItemName);
@@ -47,8 +49,8 @@ public class itemSearchTest extends baseClass {
     }
 
 
-    @Test(priority = 3)
-    public void enterPartialSearchInput() throws InterruptedException {
+    @Test(dataProvider = "testDataDetails",dataProviderClass = excelData.class,priority = 3)
+    public void enterPartialSearchInput(String URL ,String searchFoodItemName, String searchFoodByUPPER, String searchFoodByLOWER, String searchFoodByCategory, String searchFoodByPartial, String searchFoodByInvalidName, Integer Quantity, String searchFoodBySpecialChar) throws InterruptedException {
         test = extent.createTest("To validate search results with partial valid name");
         itemSearchPage searchPageObj = new itemSearchPage(driver);
         Thread.sleep(3000);
@@ -70,8 +72,8 @@ public class itemSearchTest extends baseClass {
         System.out.println("All result titles contain the search term 'burg'.");
     }
 
-    @Test(priority = 4)
-    public void enterInvalidSearchItemName() throws InterruptedException {
+    @Test(dataProvider = "testDataDetails",dataProviderClass = excelData.class,priority = 4)
+    public void enterInvalidSearchItemName(String URL ,String searchFoodItemName, String searchFoodByUPPER, String searchFoodByLOWER, String searchFoodByCategory, String searchFoodByPartial, String searchFoodByInvalidName, Integer Quantity, String searchFoodBySpecialChar) throws InterruptedException {
         test = extent.createTest("To validate search results with invalid name");
         itemSearchPage searchPageObj = new itemSearchPage(driver);
         Thread.sleep(3000);
@@ -85,8 +87,8 @@ public class itemSearchTest extends baseClass {
         String screenshotPath = captureScreenshot("enterInvalidSearchItemName");
         test.fail("The invalid is displaying the default items").addScreenCaptureFromPath(screenshotPath);
     }
-    @Test(priority = 5)
-    public void verifyInCaseSensitiveSearchInput() throws InterruptedException {
+    @Test(dataProvider = "testDataDetails",dataProviderClass = excelData.class,priority = 5)
+    public void verifyInCaseSensitiveSearchInput(String URL ,String searchFoodItemName, String searchFoodByUPPER, String searchFoodByLOWER, String searchFoodByCategory, String searchFoodByPartial, String searchFoodByInvalidName, Integer Quantity, String searchFoodBySpecialChar) throws InterruptedException {
         test = extent.createTest("To validate search results with case sensitive inputs");
         itemSearchPage searchPageObj = new itemSearchPage(driver);
         Thread.sleep(3000);
@@ -104,8 +106,8 @@ public class itemSearchTest extends baseClass {
         test.pass("The search results are same for both case sensitive inputs");
 
     }
-    @Test(priority = 6)
-    public void searchInputByCategory() throws InterruptedException {
+    @Test(dataProvider = "testDataDetails",dataProviderClass = excelData.class,priority = 6)
+    public void searchInputByCategory(String URL ,String searchFoodItemName, String searchFoodByUPPER, String searchFoodByLOWER, String searchFoodByCategory, String searchFoodByPartial, String searchFoodByInvalidName, Integer Quantity, String searchFoodBySpecialChar) throws InterruptedException {
         test = extent.createTest("To validate search results with Category ");
         itemSearchPage searchPageObj = new itemSearchPage(driver);
         Thread.sleep(3000);
@@ -131,8 +133,8 @@ public class itemSearchTest extends baseClass {
 
 
     }
-    @Test(priority = 7)
-    public void enterSpecialCharacters() throws InterruptedException {
+    @Test(dataProvider = "testDataDetails",dataProviderClass = excelData.class,priority = 7)
+    public void enterSpecialCharacters(String URL ,String searchFoodItemName, String searchFoodByUPPER, String searchFoodByLOWER, String searchFoodByCategory, String searchFoodByPartial, String searchFoodByInvalidName, Integer Quantity, String searchFoodBySpecialChar) throws InterruptedException {
         test = extent.createTest("To validate search results with special characters ");
         itemSearchPage searchPageObj = new itemSearchPage(driver);
         Thread.sleep(3000);
@@ -141,37 +143,13 @@ public class itemSearchTest extends baseClass {
         searchPageObj.searchItem(searchFoodBySpecialChar);
         List<WebElement> results = searchPageObj.getSearchResults();
         Thread.sleep(3000);
+        if(!results.isEmpty()){
+            String screenshotPath = captureScreenshot("enterSpecialCharacters");
+            test.fail("The invalid search input is displaying the default items ").addScreenCaptureFromPath(screenshotPath);
 
-       String screenshotPath = captureScreenshot("enterSpecialCharacters");
-       test.fail("The invalid search input is displaying the default items ").addScreenCaptureFromPath(screenshotPath);
-        //MediaEntityBuilder.createScreenCaptureFromPath(screenshotPath).build();
-
-    }
-
-
-    /*
-    @Test
-    public void enterLessThan2characters() throws InterruptedException {
-        test = extent.createTest("To validate search results with Category ");
-        itemSearchPage searchPageObj = new itemSearchPage(driver);
-        Thread.sleep(3000);
-
-        searchPageObj.clickItemSearchBar();
-        String searchItemInput = "ve";
-        searchPageObj.searchItem(searchItemInput);
-        String toastMessage = searchPageObj.minimumMessage();
-        System.out.println(toastMessage);
-        Assert.assertTrue(toastMessage.contains("Please enter minimum 3 characters"),
-                "Message does not contain the expected text: " + toastMessage);
-        test.pass("Error message displayed : "+toastMessage);
+        }else{
+            test.pass("No items displayed for invalid search input.");
+        }
 
     }
-
-
-*/
-
-
-
-
-
 }

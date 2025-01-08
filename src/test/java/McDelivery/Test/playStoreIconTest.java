@@ -1,6 +1,7 @@
 package McDelivery.Test;
 
 import McDelivery.Base.baseClass;
+import McDelivery.excelData;
 import McDelivery.pages.playStoreIconPage;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
@@ -15,7 +16,7 @@ public class playStoreIconTest extends baseClass {
     @Test(priority = 1)
     public void verifyIfDisplayed() {
 
-        test = extent.createTest("verify Search Bar Visibility");
+        test = extent.createTest("verify Download button Visibility");
         playStoreIconPage playStoreObj = new playStoreIconPage(driver);
         playStoreObj.isDownloadVisible();
         test.pass("Download now button is visible");

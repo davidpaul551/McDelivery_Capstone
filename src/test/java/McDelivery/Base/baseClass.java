@@ -15,13 +15,12 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.ITestResult;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.*;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.lang.reflect.Method;
 import java.time.Duration;
 
@@ -62,6 +61,7 @@ public class baseClass {
     public void setup() throws IOException {
         //WebDriverManager.chromedriver().setup();  // Set up WebDriver
         // Excel file path
+/*
         excelFilePath = "C:\\Users\\david.doggala\\IdeaProjects\\McDelivery\\src\\test\\java\\McDelivery\\testData\\testDataMcD.xlsx";
         String sheetName = "TEST"; // Specify the sheet name here
         excelUtils = new ExcelUtils(excelFilePath, sheetName);
@@ -76,6 +76,12 @@ public class baseClass {
         searchFoodByInvalidName = excelUtils.getData(1,6);
         Quantity = (int) Double.parseDouble(excelUtils.getData(1, 7));
         searchFoodBySpecialChar = excelUtils.getData(1,8);
+
+
+
+ */
+        //InputStream input = new FileInputStream("C:\\Users\\david.doggala\\IdeaProjects\\McDelivery\\details.properties");
+
 
         String reportName = this.getClass().getSimpleName() + ".html"; // Report file name based on class
         String reportPath = System.getProperty("user.dir") + "/reports/" + reportName;
@@ -92,13 +98,14 @@ public class baseClass {
     }
 
     @BeforeMethod
-    public void initialize() throws InterruptedException {
+    @Parameters({"URL"})
+    public void initialize(@Optional("https://mcdelivery.co.in/") String URL) throws InterruptedException {
         WebDriverManager.chromedriver().setup();  // Set up WebDriver
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.manage().window().maximize();
         driver.get(URL);
-        itemSearchPage searchPageObj = new itemSearchPage(driver);
+        //itemSearchPage searchPageObj = new itemSearchPage(driver);
         playStoreIconPage playStoreObj = new playStoreIconPage(driver);
         customizationPage customObj = new customizationPage(driver);
         Thread.sleep(3000);

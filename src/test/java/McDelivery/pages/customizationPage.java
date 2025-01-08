@@ -16,14 +16,14 @@ public class customizationPage {
     WebDriverWait wait;
 
 
-    By searchResultFirstItem = By.xpath("//*[@id=\"659\"]/div");
-    By customisable = By.xpath("//*[@id=\"659\"]/div/div[3]/div[2]/span");
-    By addToCart = By.xpath("//*[@id=\"659\"]/div/div[3]/div[2]/app-add-to-cart-btn/div/div");
-    By priceItem = By.xpath("//*[@id=\"659\"]/div/div[3]/div[1]/div/span");
+    By searchResultFirstItem = By.xpath("//*[@class=\"menus__list-card\"][2]");
+    By customisable = By.xpath("//*[@class=\"menus__list-card\"][2]//*[@class=\"customizable\"]");
+    By addToCart = By.xpath("//*[@class=\"menus__list-card\"][2]//*[@class=\"alignCenter\"]");
+    By priceItem = By.xpath("//*[@class=\"menus__list-card\"][2]//*[@class=\"menu__price\"]");
     By viewCart = By.xpath("/html/body/app-root/ion-app/ion-header/app-toolbar-desktop/div/div[2]/div[2]/div");
     By orderItemDetails = By.xpath("(//div[@class='cart-page__order-summary-card'])[1]");
-    By plus = By.xpath("/html/body/app-root/ion-app/ion-content/ion-router-outlet/app-cart/ion-content/div[2]/ion-grid/ion-row/ion-col[1]/app-order-summary/div/div[2]/app-menu-card-v3/div/div[2]/app-add-to-cart-btn/div/div[3]");
-    By minus = By.xpath("/html/body/app-root/ion-app/ion-content/ion-router-outlet/app-cart/ion-content/div[2]/ion-grid/ion-row/ion-col[1]/app-order-summary/div/div[2]/app-menu-card-v3/div/div[2]/app-add-to-cart-btn/div/div[1]");
+    By plus = By.xpath("//*[@class=\"cart-page__order-summary-card\"]//*[@class=\"add-to-cart__cta-btn add-to-cart__cta-btn--plus\"]");
+    By minus = By.xpath("//*[@class=\"cart-page__order-summary-card\"]//*[@class=\"add-to-cart__cta-btn add-to-cart__cta-btn--miuns\"]");
 
     By cheeseAdd = By.xpath("//*[@id=\"ion-overlay-3\"]/app-customise/div/div[2]/div[2]/swiper/div/div[4]/app-item-card/div/div[2]/app-add-to-cart-btn/div/div");
     By cheeseRemove = By.xpath("//*[@id=\"ion-overlay-5\"]/app-customise/div/div[2]/div[2]/swiper/div/div[4]/app-item-card/div/div[2]/app-add-to-cart-btn/div/div[1]");
@@ -32,7 +32,7 @@ public class customizationPage {
     By removeVegSauce = By.xpath("//*[@id=\"ion-overlay-5\"]/app-customise/div/div[2]/div[3]/swiper/div/div[1]/app-item-card/div/div[2]/app-add-to-cart-btn/div/div[1]");
 
     By done = By.xpath("//button[contains(@class, 'app-btn') and contains(text(), 'Done')]");
-    By customisedItemDetails = By.xpath("/html/body/app-root/ion-app/ion-content/ion-router-outlet/app-cart/ion-content/div[2]/ion-grid/ion-row/ion-col[1]/app-order-summary/div/div[2]/app-menu-card-v3/div/div[1]/div/div[2]");
+    By customisedItemDetails = By.xpath("//*[@class=\"cart-page__order-summary-card\"]//*[@class=\"menu__sub-title\"]");
     By customisedPrice = By.xpath("//div[@class='menu__title-container']//div[@class='menu__price-bar']");
     By addToCart1 = By.xpath("//*[@id=\"ion-overlay-3\"]/app-customise/div/div[3]/div/app-button/button");
 
@@ -136,9 +136,11 @@ public class customizationPage {
 
     public void addVegSauceItem(int Quantity) throws InterruptedException {
         WebElement vegSauceAddItemElement = driver.findElement(addVegSauce);
+        Thread.sleep(3000);
+        js.executeScript("window.scrollBy(0, -300);");
         js.executeScript("arguments[0].scrollIntoView({behavior: 'smooth', block: 'center'});", vegSauceAddItemElement);
         Thread.sleep(3000);
-        js.executeScript("window.scrollBy(0, -100);");
+
         int maxAllowedClicks = 2;
 
         for (int i = 0; i < Math.min(Quantity, maxAllowedClicks); i++) {

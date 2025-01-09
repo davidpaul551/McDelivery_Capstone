@@ -1,13 +1,10 @@
 package McDelivery.Test;
 
 import McDelivery.Base.baseClass;
-import McDelivery.excelData;
 import McDelivery.pages.playStoreIconPage;
-import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import java.util.Set;
-import java.util.HashSet;
 
 public class playStoreIconTest extends baseClass {
 
@@ -43,6 +40,7 @@ public class playStoreIconTest extends baseClass {
         playStoreIconPage playStoreObj = new playStoreIconPage(driver);
         String mainUrl = playStoreObj.getMainUrl();
         String mainWindowHandle = driver.getWindowHandle();
+        System.out.println(mainWindowHandle);
         playStoreObj.clickDownload();
         Thread.sleep(3000);
 

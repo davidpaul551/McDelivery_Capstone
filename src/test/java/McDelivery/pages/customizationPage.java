@@ -16,10 +16,10 @@ public class customizationPage {
     WebDriverWait wait;
 
 
-    By searchResultFirstItem = By.xpath("//*[@class=\"menus__list-card\"][2]");
-    By customisable = By.xpath("//*[@class=\"menus__list-card\"][2]//*[@class=\"customizable\"]");
-    By addToCart = By.xpath("//*[@class=\"menus__list-card\"][2]//*[@class=\"alignCenter\"]");
-    By priceItem = By.xpath("//*[@class=\"menus__list-card\"][2]//*[@class=\"menu__price\"]");
+    By searchResultFirstItem = By.xpath("//*[@class=\"menuCardGrid\"]//*[@class=\"menus__list-card\" and contains(., 'McAloo Tikki Burger')]");
+    By customisable = By.xpath("//*[@class=\"menuCardGrid\"]//*[@class=\"menus__list-card\"][2]//*[@class=\"customizable\"]");
+    By addToCart = By.xpath("//*[@class=\"menuCardGrid\"]//*[@class=\"menus__list-card\"][2]//*[@class=\"add-to-cart\"]");
+    By priceItem = By.xpath("//*[@class=\"menuCardGrid\"]//*[@class=\"menus__list-card\"][2]//*[@class=\"menu__price\"]");
     By viewCart = By.xpath("/html/body/app-root/ion-app/ion-header/app-toolbar-desktop/div/div[2]/div[2]/div");
     By orderItemDetails = By.xpath("(//div[@class='cart-page__order-summary-card'])[1]");
     By plus = By.xpath("//*[@class=\"cart-page__order-summary-card\"]//*[@class=\"add-to-cart__cta-btn add-to-cart__cta-btn--plus\"]");
@@ -50,8 +50,6 @@ public class customizationPage {
     public WebElement firstItem() {
         WebElement searchItemFirstElement = wait.until(ExpectedConditions.visibilityOfElementLocated(searchResultFirstItem));
         js.executeScript("arguments[0].scrollIntoView({behavior: 'smooth', block: 'center'});", searchItemFirstElement);
-
-
         return searchItemFirstElement;
     }
 
@@ -65,6 +63,7 @@ public class customizationPage {
     }
 
     public WebElement addToCartItem(){
+        js.executeScript("window.scrollBy(0, 150);");
         WebElement addToCartElement = wait.until(ExpectedConditions.elementToBeClickable(addToCart));
        // addToCartElement.click();
         return addToCartElement;
@@ -84,27 +83,22 @@ public class customizationPage {
     public void cartDetails(){
         WebElement orderItemDetailsElement = driver.findElement(orderItemDetails);
         js.executeScript("arguments[0].scrollIntoView({behavior: 'smooth', block: 'center'});", orderItemDetailsElement);
-
-
-
     }
     public boolean isOrderDetailsDisplayed(){
         return wait.until(ExpectedConditions.visibilityOfElementLocated(orderItemDetails)).isDisplayed();
-
-
     }
     public void increaseQuantityByOne(double Quantity) throws InterruptedException {
         for(int i=0 ;i<Quantity ;i++) {
             WebElement plusElement = driver.findElement(plus);
             plusElement.click();
-            Thread.sleep(3000);
+            Thread.sleep(1000);
         }
     }
     public void decreaseQuantityByOne(double Quantity) throws InterruptedException {
         for(int i=0 ;i<Quantity ;i++) {
             WebElement minusElement = driver.findElement(minus);
             minusElement.click();
-            Thread.sleep(3000);
+            Thread.sleep(1000);
         }
     }
 

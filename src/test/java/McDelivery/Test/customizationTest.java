@@ -1,7 +1,7 @@
 package McDelivery.Test;
 
 import McDelivery.Base.baseClass;
-import McDelivery.excelData;
+import McDelivery.utils.excelData;
 import McDelivery.pages.customizationPage;
 import McDelivery.pages.itemSearchPage;
 import org.testng.Assert;
@@ -119,6 +119,7 @@ public class customizationTest extends baseClass {
         test = extent.createTest("Verify if customisable text and add to cart displayed   under item");
         customizationPage customObj = new customizationPage(driver);
         itemSearchPage searchPageObj = new itemSearchPage(driver);
+        Thread.sleep(3000);
         waitForElementToBeClickable(searchPageObj.clickItemSearchBar(),10).click();
         searchPageObj.searchItem(searchFoodItemName);
         customObj.firstItem();

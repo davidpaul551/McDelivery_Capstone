@@ -1,4 +1,4 @@
-package McDelivery;
+package McDelivery.utils;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.DataFormatter;
@@ -9,9 +9,7 @@ import org.testng.annotations.DataProvider;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Arrays;
 
 public class excelData {
     @DataProvider(name = "testDataDetails")
